@@ -1,3 +1,6 @@
 # Options for raprec
+#
+# ffmpeg options - optimized for a Pi Camera 1.3, and maximum field-of-vision
 FFMPEG_PATH="/usr/bin/ffmpeg"
-FFMPEG_OPTS="-y -c:v h264_omx -b:v 5M"
+FFMPEG_INPUT_OPTS="-f v4l2 -s 1296x730"
+FFMPEG_OPTS="-y -c:v h264_omx -b:v 5M -r 30"

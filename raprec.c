@@ -42,6 +42,7 @@
 
 #define VIDEO_DEVICE "/dev/video0"
 #define FFMPEG_PATH "/usr/bin/ffmpeg"
+#define FFMPEG_INPUT_OPTS "-f v4l2 -s 1296x730"
 #define FFMPEG_OPTS "-y -c:v h264_omx -b:v 5M"
 
 //Global variables
@@ -80,6 +81,7 @@ int main()
 	int failCount, rtc;
 
 	const char *ffmpegPath = getenv_or("FFMPEG_PATH", FFMPEG_PATH);
+	const char *ffmpegInputOpts = getenv_or("FFMPEG_INPUT_OPTS", FFMPEG_INPUT_OPTS);
 	const char *ffmpegOpts = getenv_or("FFMPEG_OPTS", FFMPEG_OPTS);
 	const char *videoDevice = getenv_or("VIDEO_DEVICE", VIDEO_DEVICE);
 
@@ -171,12 +173,12 @@ int main()
 				gettimeofday(&tv, NULL);
 
 				//Build an FFMPEG command, with the timestamped filename.
-				strLength = snprintf(NULL, 0, "exec %s -i %s %s /var/www/html/vids/%ld%03ld.mp4", 
-						     ffmpegPath, videoDevice, ffmpegOpts,
+				strLength = snprintf(NULL, 0, "exec %s %s -i %s %s /var/www/html/vids/%ld%03ld.mp4", 
+						     ffmpegPath, ffmpegInputOpts, videoDevice, ffmpegOpts,
 						     tv.tv_sec, tv.tv_usec / 1000) + 1;
 				cmdStr = malloc(strLength);
-				snprintf(cmdStr, strLength, "exec %s -i %s %s /var/www/html/vids/%ld%03ld.mp4", 
-						     ffmpegPath, videoDevice, ffmpegOpts,
+				snprintf(cmdStr, strLength, "exec %s %s -i %s %s /var/www/html/vids/%ld%03ld.mp4", 
+						     ffmpegPath, ffmpegInputOpts, videoDevice, ffmpegOpts,
 						     tv.tv_sec, tv.tv_usec / 1000);
 
 				// Run FFMPEG
