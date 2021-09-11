@@ -375,7 +375,7 @@ function menuSelect(menuNumber)
 				pwLabel = document.createElement('span');
 				pwLabel.innerHTML = "Password: ";
 				password = document.createElement('input');
-				password.type = 'text';
+				password.type = 'password';
 				password.name = 'password';
 				password.id = 'password';
 				password.value = currentSettings["PSK"];

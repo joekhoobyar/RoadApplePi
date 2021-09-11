@@ -79,6 +79,14 @@ sudo cp dnsmasq.conf /etc
 sudo mkdir /var/www/html/vids
 sudo chown -R www-data:www-data /var/www/html
 
+# Enable SSL and HTTP => HTTPS redirect.
+sudo install -o root -g root -m 0644 rewrite-ssl.conf /etc/apache2/sites-available
+sudo a2enmod ssl
+sudo a2ensite default-ssl
+sudo a2enmod rewrite
+sudo a2ensite rewrite-ssl
+sudo a2dissite 000-default
+
 installDate=$(date)
 cp roadapplepi.sql roadapplepi-configd.sql
 echo "INSERT INTO env (name, value) VALUES (\"rapVersion\", \"$softwareVersion\"), (\"installDate\", \"$installDate\");" >> roadapplepi-configd.sql
