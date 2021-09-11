@@ -70,9 +70,8 @@ sudo cp -r html /var/www/
 sudo rm /var/www/html/index.html
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 0755 /var/www/html
-sudo cp raprec.service /lib/systemd/system
-sudo chown root:root /lib/systemd/system/raprec.service
-sudo chmod 0755 /lib/systemd/system/raprec.service
+sudo install -o root -g root -m 0755 raprec.service /lib/systemd/system
+[ -f /etc/default/raprec ] || sudo install -o root -g root -m 0644 -T raprec.defaults /etc/default/raprec
 sudo systemctl daemon-reload
 sudo systemctl enable raprec
 sudo cp hostapd-rap.conf /etc/hostapd

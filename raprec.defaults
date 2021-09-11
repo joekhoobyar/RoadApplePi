@@ -1,0 +1,3 @@
+# Options for raprec
+FFMPEG_PATH="/usr/bin/ffmpeg"
+FFMPEG_OPTS="-y -c:v h264_omx -b:v 5M"
