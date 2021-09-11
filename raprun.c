@@ -58,6 +58,16 @@ int main(int argc, char* argv[])
 	//**********
 	if(strcmp(argv[1], "-r") == 0) system("shutdown -r now");
 
+	//***********
+	//Stop Recording
+	//***********
+	if(strcmp(argv[1], "-v0") == 0) system("systemctl stop raprec");
+
+	//***********
+	//Start Recording
+	//***********
+	if(strcmp(argv[1], "-v1") == 0) system("systemctl start raprec");
+
 	//**********
 	//Sync Clock
 	//**********
