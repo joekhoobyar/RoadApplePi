@@ -161,6 +161,7 @@ int main(int argc, char* argv[])
 
 		//Start AP
 		system("systemctl restart dhcpcd");
+		system("systemctl unmask hostapd");
 		system("systemctl enable hostapd");
 		system("systemctl restart hostapd");
 		system("systemctl enable dnsmasq");
@@ -212,6 +213,7 @@ int main(int argc, char* argv[])
 		system("ifconfig wlan0 down");
 		system("systemctl stop hostapd");
 		system("systemctl disable hostapd");
+		system("systemctl mask hostapd");
 		system("systemctl stop dnsmasq");
 		system("systemctl disable dnsmasq");
 
